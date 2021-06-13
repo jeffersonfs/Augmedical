@@ -10,6 +10,6 @@ class ImageTransform:
 
     def __call__(self, sample):
         if random.random() <= self.p:
-            sample["image"] = self.apply(sample["image"])
+            sample = self.apply(sample)
 
         return sample
