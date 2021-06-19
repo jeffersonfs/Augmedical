@@ -1,6 +1,8 @@
-from skimage.filters import gaussian
-import numpy as np
 import random
+
+import numpy as np
+from skimage.filters import gaussian
+
 from ..transforms.transforms import ImageTransform
 
 
@@ -17,14 +19,14 @@ class Blur(ImageTransform):
     def apply(self, x) -> np.ndarray:
         if random.random() <= self.p:
             for _ in range(self.iterations):
-                x = self.filter(x) * self.alpha + x * (1-self.alpha)
+                x = self.filter(x) * self.alpha + x * (1 - self.alpha)
 
         return x
 
 
 class GaussianBlur(Blur):
     def filter(self, x):
-        return gaussian(x, sigma=self.kernel_size/4)
+        return gaussian(x, sigma=self.kernel_size / 4, multichannel=True)
 
 
 class BoxBlur(Blur):
